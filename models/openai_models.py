@@ -2,9 +2,13 @@ import requests
 import json
 import os
 from utils.get_keys import load_config
+from dotenv import load_dotenv
+import os
+
+
 
 config_path = os.path.join(os.path.dirname(__file__), '..', 'configs', 'config.yaml')
-load_config(config_path)
+# load_config(config_path)
 
 class OpenAIModel:
     def __init__(self, model, system_prompt, temperature):
@@ -12,7 +16,10 @@ class OpenAIModel:
         self.temperature = temperature
         self.model = model
         self.system_prompt = system_prompt
-        load_config(config_path)
+        # load_config(config_path)
+        load_dotenv()  # take environment variables from .env.
+
+
         self.api_key = os.getenv('OPENAI_API_KEY')
         self.headers = {
             'Content-Type': 'application/json',
